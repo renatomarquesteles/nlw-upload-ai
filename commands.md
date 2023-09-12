@@ -15,3 +15,6 @@
   - yes React Server Components
 
 `npx shadcn-ui@latest add button`
+
+`npm install lucide-react`
+`npx shadcn-ui@latest add separator`
