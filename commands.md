@@ -20,3 +20,9 @@
 `npx shadcn-ui@latest add separator`
 
 `npx shadcn-ui@latest add textarea`
+
+`npx shadcn-ui@latest add label`
+
+`npx shadcn-ui@latest add select`
+
+`npx shadcn-ui@latest add slider`

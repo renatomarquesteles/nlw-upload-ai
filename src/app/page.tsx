@@ -1,9 +1,17 @@
-import { FileVideo, Github, Upload } from 'lucide-react'
+import { FileVideo, Github, Upload, Wand2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Slider } from '@/components/ui/slider'
 
 export default function Home() {
   return (
@@ -25,7 +33,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1 p-6 flex gap-6">
+      <main className="flex-1 px-6 py-4 flex gap-6">
         <div className="flex flex-col flex-1 gap-4">
           <div className="grid grid-rows-2 gap-4 flex-1">
             <Textarea
@@ -48,7 +56,7 @@ export default function Home() {
         </div>
 
         <div className="w-80 space-y-6">
-          <form className="space-y-6">
+          <form className="space-y-4">
             <label
               htmlFor="video"
               className="border flex rounded-md aspect-video cursor-pointer border-dashed text-sm flex-col gap-2 items-center justify-center text-muted-foreground transition-colors hover:bg-primary/5"
@@ -66,11 +74,11 @@ export default function Home() {
 
             <Separator />
 
-            <div className="space-y-1">
+            <div className="space-y-2">
               <Label htmlFor="transcription_prompt">Transcription Prompt</Label>
               <Textarea
                 id="transcription_prompt"
-                className="min-h-20 leading-relaxed"
+                className="h-20 leading-relaxed resize-none"
                 placeholder="Add keywords mentioned in the video separated by commas"
               />
             </div>
@@ -78,6 +86,62 @@ export default function Home() {
             <Button type="submit" className="w-full">
               Load video
               <Upload className="w-4 h-4 ml-2" />
+            </Button>
+          </form>
+
+          <Separator />
+
+          <form className="space-y-6">
+            <div className="space-y-2">
+              <Label>Prompt</Label>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a prompt..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="yt-title">YouTube title</SelectItem>
+                  <SelectItem value="yt-description">
+                    YouTube description
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+
+              <span className="block text-xs text-muted-foreground italic">
+                You will be able to change this option soon
+              </span>
+            </div>
+
+            <div className="space-y-2">
+              <Label>Model</Label>
+              <Select disabled defaultValue="gpt3.5">
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="gpt3.5">GPT 3.5-turbo 16k</SelectItem>
+                </SelectContent>
+              </Select>
+
+              <span className="block text-xs text-muted-foreground italic">
+                You will be able to change this option soon
+              </span>
+            </div>
+
+            <Separator />
+
+            <div className="space-y-4">
+              <Label>Temperature</Label>
+              <Slider min={0} max={1} step={0.1} defaultValue={[0.5]} />
+              <span className="block text-xs text-muted-foreground italic leading-relaxed">
+                Higher values tend to make the result more creative but more
+                susceptible to errors
+              </span>
+            </div>
+
+            <Separator />
+
+            <Button type="submit" className="w-full">
+              Run <Wand2 className="w-4 h-4 ml-2" />
             </Button>
           </form>
         </div>
