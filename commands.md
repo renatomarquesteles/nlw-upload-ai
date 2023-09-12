@@ -18,3 +18,5 @@
 
 `npm install lucide-react`
 `npx shadcn-ui@latest add separator`
+
+`npx shadcn-ui@latest add textarea`
