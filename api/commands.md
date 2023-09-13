@@ -10,3 +10,5 @@
 `npx prisma migrate dev`
 
 `npx tsc --init`
+
+`npm i @fastify/multipart`
