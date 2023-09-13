@@ -8,3 +8,5 @@
 `npm i -D prisma`
 `npx prisma init --datasource-provider SQLite`
 `npx prisma migrate dev`
+
+`npx tsc --init`
