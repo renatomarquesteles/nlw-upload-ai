@@ -16,3 +16,12 @@ Content-Type: audio/mpeg
 
 ###
 
+# @name create-transcription
+POST http://localhost:3333/videos/64e0ae1c-3542-4cf7-8a77-afeed3154a7a/transcription
+Content-Type: application/json
+
+{
+  "prompt": "Snack, GitHub, git bash, App, Git, login"
+}
+
+###
