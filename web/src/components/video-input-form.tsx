@@ -1,6 +1,13 @@
 'use client'
 
-import { ChangeEvent, FormEvent, useMemo, useRef, useState } from 'react'
+import {
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { FileVideo, Upload } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -10,9 +17,28 @@ import { Textarea } from '@/components/ui/textarea'
 import { getFFmpeg } from '@/lib/ffmpeg'
 import { fetchFile } from '@ffmpeg/util'
 
+type Status =
+  | 'waiting'
+  | 'converting'
+  | 'uploading'
+  | 'transcribing'
+  | 'success'
+
+const statusMessages = {
+  converting: 'Converting...',
+  uploading: 'Uploading...',
+  transcribing: 'Transcribing...',
+  success: 'Success!',
+}
+
 export function VideoInputForm() {
   const [videoFile, setVideoFile] = useState<File | null>(null)
+  const [status, setStatus] = useState<Status>('waiting')
   const promptInputRef = useRef<HTMLTextAreaElement>(null)
+
+  useEffect(() => {
+    setStatus('waiting')
+  }, [videoFile])
 
   function handleFileSelected(event: ChangeEvent<HTMLInputElement>) {
     const { files } = event.currentTarget
@@ -66,11 +92,15 @@ export function VideoInputForm() {
 
     if (!videoFile) return
 
+    setStatus('converting')
+
     const audioFile = await convertVideoToAudio(videoFile)
 
     const data = new FormData()
 
     data.append('file', audioFile)
+
+    setStatus('uploading')
 
     const response = await fetch('http://localhost:3333/videos', {
       method: 'POST',
@@ -79,13 +109,15 @@ export function VideoInputForm() {
 
     const videoId = response.video.id
 
+    setStatus('transcribing')
+
     await fetch(`http://localhost:3333/videos/${videoId}/transcription`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ prompt }),
     })
 
-    console.log('Transcription completed')
+    setStatus('success')
   }
 
   const videoPreviewUrl = useMemo(() => {
@@ -131,12 +163,24 @@ export function VideoInputForm() {
           id="transcription_prompt"
           className="h-20 leading-relaxed resize-none"
           placeholder="Add keywords mentioned in the video separated by commas"
+          disabled={status !== 'waiting'}
         />
       </div>
 
-      <Button type="submit" className="w-full">
-        Load video
-        <Upload className="w-4 h-4 ml-2" />
+      <Button
+        type="submit"
+        className="w-full transition-all data-[success=true]:bg-emerald-700 data-[success=true]:text-white data-[success=true]:opacity-100"
+        data-success={status === 'success'}
+        disabled={status !== 'waiting'}
+      >
+        {status === 'waiting' ? (
+          <>
+            Load video
+            <Upload className="w-4 h-4 ml-2" />
+          </>
+        ) : (
+          statusMessages[status]
+        )}
       </Button>
     </form>
   )
