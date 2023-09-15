@@ -8,7 +8,7 @@ import {
   useRef,
   useState,
 } from 'react'
-import { FileVideo, Upload } from 'lucide-react'
+import { FileVideo, Loader2, Upload } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
@@ -178,6 +178,12 @@ export function VideoInputForm({ onVideoUploaded }: VideoInputFormProps) {
         data-success={status === 'success'}
         disabled={status !== 'waiting'}
       >
+        {(status === 'converting' ||
+          status === 'uploading' ||
+          status === 'transcribing') && (
+          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+        )}
+
         {status === 'waiting' ? (
           <>
             Load video
