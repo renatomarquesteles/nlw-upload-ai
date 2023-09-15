@@ -22,3 +22,5 @@
 `npm i @fastify/cors`
 
 `npm i ai`
+
+`npx prisma db seed`
