@@ -20,3 +20,5 @@
 `npm i -D dotenv`
 
 `npm i @fastify/cors`
+
+`npm i @ffmpeg/ffmpeg @ffmpeg/util`
