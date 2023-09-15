@@ -1,5 +1,5 @@
+import { OpenAIStream, streamToResponse } from 'ai'
 import { FastifyInstance } from 'fastify'
-import { createReadStream } from 'node:fs'
 import { z } from 'zod'
 
 import { prisma } from '@/lib/prisma'
@@ -34,8 +34,16 @@ export async function generateAICompletionRoute(app: FastifyInstance) {
       model: 'gpt-3.5-turbo', // token limit = 4096 tokens (OpenAI Tokenizer)
       temperature,
       messages: [{ role: 'user', content: promptMessage }],
+      stream: true,
     })
 
-    return response
+    // create a stream to keep returning the response as it's generated
+    const stream = OpenAIStream(response)
+    streamToResponse(stream, res.raw, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      },
+    })
   })
 }

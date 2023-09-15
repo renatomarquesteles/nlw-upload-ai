@@ -21,4 +21,4 @@
 
 `npm i @fastify/cors`
 
-`npm i @ffmpeg/ffmpeg @ffmpeg/util`
+`npm i ai`

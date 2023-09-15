@@ -26,3 +26,5 @@
 `npx shadcn-ui@latest add select`
 
 `npx shadcn-ui@latest add slider`
+
+`npm i @ffmpeg/ffmpeg @ffmpeg/util`
