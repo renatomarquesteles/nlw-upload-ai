@@ -13,8 +13,13 @@ import {
 } from '@/components/ui/select'
 import { Slider } from '@/components/ui/slider'
 import { VideoInputForm } from '@/components/video-input-form'
+import { PromptSelect } from '@/components/prompt-select'
 
 export default function Home() {
+  function handlePromptSelected(template: string) {
+    console.log(template)
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <header className="px-6 py-3 flex items-center justify-between border-b">
@@ -64,17 +69,7 @@ export default function Home() {
           <form className="space-y-6">
             <div className="space-y-2">
               <Label>Prompt</Label>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a prompt..." />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="yt-title">YouTube title</SelectItem>
-                  <SelectItem value="yt-description">
-                    YouTube description
-                  </SelectItem>
-                </SelectContent>
-              </Select>
+              <PromptSelect onPromptSelected={handlePromptSelected} />
 
               <span className="block text-xs text-muted-foreground italic">
                 You will be able to change this option soon
