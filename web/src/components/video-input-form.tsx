@@ -56,7 +56,7 @@ export function VideoInputForm() {
 
     console.log('Conversion completed')
 
-    console.log(audioFile)
+    return audioFile
   }
 
   async function handleUploadVideo(event: FormEvent<HTMLFormElement>) {
@@ -67,6 +67,25 @@ export function VideoInputForm() {
     if (!videoFile) return
 
     const audioFile = await convertVideoToAudio(videoFile)
+
+    const data = new FormData()
+
+    data.append('file', audioFile)
+
+    const response = await fetch('http://localhost:3333/videos', {
+      method: 'POST',
+      body: data,
+    }).then((response) => response.json())
+
+    const videoId = response.video.id
+
+    await fetch(`http://localhost:3333/videos/${videoId}/transcription`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt }),
+    })
+
+    console.log('Transcription completed')
   }
 
   const videoPreviewUrl = useMemo(() => {
