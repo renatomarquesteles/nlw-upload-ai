@@ -10,23 +10,23 @@ async function main() {
       title: 'YouTube title',
       template: `Your role is to generate three titles for a YouTube video..
 
-      Below you will receive a transcript of this video, use this transcript to generate the titles.
-      Below you will also receive a list of titles, use this list as a reference for the titles to be generated.
+Below you will receive a transcript of this video, use this transcript to generate the titles.
+Below you will also receive a list of titles, use this list as a reference for the titles to be generated.
 
-      Titles must have a maximum of 60 characters.
-      Titles must be eye-catching and attractive to maximize clicks.
+Titles must have a maximum of 60 characters.
+Titles must be eye-catching and attractive to maximize clicks.
 
-      Return ONLY the three titles in list format as in the example below:
-      '''
-      - Title 1
-      - Title 2
-      - Title 3
-      '''
+Return ONLY the three titles in list format as in the example below:
+'''
+- Title 1
+- Title 2
+- Title 3
+'''
 
-      Transcription:
-      '''
-      {transcription}
-      '''`.trim(),
+Transcription:
+'''
+{transcription}
+'''`.trim(),
     },
   })
 
@@ -36,25 +36,25 @@ async function main() {
       template:
         `Your role is to generate a succinct description for a YouTube video.
   
-        Below you will receive a transcript of this video, use this transcript to generate the description.
+Below you will receive a transcript of this video, use this transcript to generate the description.
 
-        The description must have a maximum of 80 words in the first person containing the main points of the video.
+The description must have a maximum of 80 words in the first person containing the main points of the video.
 
-        Use eye-catching words that capture the attention of those reading.
+Use eye-catching words that capture the attention of those reading.
 
-        Additionally, at the end of the description include a list of 3 to 10 hashtags in lowercase letters containing the video's keywords.
+Additionally, at the end of the description include a list of 3 to 10 hashtags in lowercase letters containing the video's keywords.
 
-        The return must follow the following format:
-        '''
-        Description.
+The return must follow the following format:
+'''
+Description.
 
-        #hashtag1 #hashtag2 #hashtag3 ...
-        '''
+#hashtag1 #hashtag2 #hashtag3 ...
+'''
 
-        Transcription:
-        '''
-        {transcription}
-        '''`.trim(),
+Transcription:
+'''
+{transcription}
+'''`.trim(),
     },
   })
 }
