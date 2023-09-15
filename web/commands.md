@@ -28,3 +28,5 @@
 `npx shadcn-ui@latest add slider`
 
 `npm i @ffmpeg/ffmpeg @ffmpeg/util`
+
+`npm i ai`

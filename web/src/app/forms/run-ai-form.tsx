@@ -1,5 +1,6 @@
 'use client'
 
+import { FormEvent } from 'react'
 import { Wand2 } from 'lucide-react'
 
 import { PromptSelect } from '@/components/prompt-select'
@@ -16,18 +17,22 @@ import { Separator } from '@/components/ui/separator'
 import { Slider } from '@/components/ui/slider'
 
 interface RunAIFormProps {
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void
   handlePromptSelected: (template: string) => void
   handleTemperatureChange: (value: number) => void
   temperature: number
+  isLoading: boolean
 }
 
 export function RunAIForm({
+  handleSubmit,
   handlePromptSelected,
   handleTemperatureChange,
   temperature,
+  isLoading,
 }: RunAIFormProps) {
   return (
-    <form className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
         <Label>Prompt</Label>
         <PromptSelect onPromptSelected={handlePromptSelected} />
@@ -72,7 +77,7 @@ export function RunAIForm({
 
       <Separator />
 
-      <Button type="submit" className="w-full">
+      <Button type="submit" disabled={isLoading} className="w-full">
         Run <Wand2 className="w-4 h-4 ml-2" />
       </Button>
     </form>
