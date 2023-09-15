@@ -1,8 +1,9 @@
+import Link from 'next/link'
 import { Github } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import Link from 'next/link'
+import { ThemeToggle } from '@/components/theme-toggle'
 
 export function Header() {
   return (
@@ -13,6 +14,10 @@ export function Header() {
         <span className="text-sm text-muted-foreground">
           Developed with 💜 during the NLW by Rocketseat
         </span>
+
+        <Separator orientation="vertical" className="h-6" />
+
+        <ThemeToggle />
 
         <Separator orientation="vertical" className="h-6" />
 
