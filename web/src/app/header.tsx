@@ -2,6 +2,7 @@ import { Github } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import Link from 'next/link'
 
 export function Header() {
   return (
@@ -15,10 +16,15 @@ export function Header() {
 
         <Separator orientation="vertical" className="h-6" />
 
-        <Button variant="outline">
-          <Github className="w-4 h-4 mr-2" />
-          GitHub
-        </Button>
+        <Link
+          href="https://github.com/renatomarquesteles/nlw-upload-ai"
+          target="_blank"
+        >
+          <Button variant="outline">
+            <Github className="w-4 h-4 mr-2" />
+            GitHub
+          </Button>
+        </Link>
       </div>
     </header>
   )
